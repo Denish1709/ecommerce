@@ -14,10 +14,12 @@ const orderSchema = new Schema({
     required: true,
   },
 
-  products: {
-    type: Schema.Types.ObjectId,
-    ref: "Product",
-  },
+  products: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Product",
+    },
+  ],
 
   totalPrice: {
     type: Number,
@@ -26,7 +28,17 @@ const orderSchema = new Schema({
 
   status: {
     type: String,
-    enum: ["Pending", "Shipped", "Delivered"],
+    default: "Pending",
+    enum: ["Pending", "Paid", "Failed", "Shipped", "Delivered"],
+  },
+
+  billplz_id: {
+    type: String,
+    require: true,
+  },
+
+  paid_at: {
+    type: Date,
   },
 });
 
